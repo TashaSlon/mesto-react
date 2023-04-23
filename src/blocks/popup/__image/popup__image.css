@@ -2,5 +2,6 @@
   width: 75vw;
   height: 75vh;
 
-  object-fit: contain;
+  background-position: center;
+  background-size: cover;
 }

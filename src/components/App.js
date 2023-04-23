@@ -47,19 +47,27 @@ function App() {
       <Main onEditProfile = {handleEditProfileClick}
       onAddPlace = {handleAddPlaceClick} 
       onEditAvatar = {handleEditAvatarClick}
-      onSubmit = {handleSubmitClick}
       onCardClick = {handleCardClick} />
       <Footer/>
 
-      <PopupWithForm name='avatar' title='Обновить аватар' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name='avatar' 
+        title='Обновить аватар' 
+        isOpen={isEditAvatarPopupOpen} 
+        onClose={closeAllPopups}
+        buttonText='Сохранить'>
         <label>
           <input className="form__input form__input_type_avatarlink" type="text" id="avatarlink-input" required minLength="2" maxLength="200" placeholder="Ссылка" name="avatar" />
           <span className="form__input-error avatarlink-input-error"></span>
         </label>
-        <button className="form__submit btn btn_type_save" type="submit">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm name='profile' title='Редактировать профиль' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name='profile' 
+        title='Редактировать профиль' 
+        isOpen={isEditProfilePopupOpen} 
+        onClose={closeAllPopups}
+        buttonText='Сохранить'>
         <label>
           <input className="form__input form__input_type_name" type="text" id="name-input" required minLength="2" maxLength="40" placeholder="Имя" name="name" />
           <span className="form__input-error name-input-error"></span>
@@ -68,10 +76,13 @@ function App() {
           <input className="form__input form__input_type_activity" type="text" id="activity-input" required minLength="2" maxLength="200" placeholder="О себе" name="about" />
           <span className="form__input-error activity-input-error"></span>
         </label>
-        <button className="form__submit btn btn_type_save" type="submit">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm name='add' title='Новое место' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm 
+        name='add' title='Новое место' 
+        isOpen={isAddPlacePopupOpen} 
+        onClose={closeAllPopups}
+        buttonText='Сохранить'>
         <label>
           <input className="form__input form__input_type_title" type="text" id="title-input" required minLength="2" maxLength="30" placeholder="Название" name="name" />
           <span className="form__input-error title-input-error"></span>
@@ -80,16 +91,20 @@ function App() {
           <input className="form__input form__input_type_link" type="url" id="link-input" required placeholder="Ссылка на картинку" name="link" />
           <span className="form__input-error link-input-error"></span>
         </label>
-        <button className="form__submit btn btn_type_save" type="submit">Сохранить</button>
       </PopupWithForm>
 
-      <PopupWithForm name='submit' title='Вы уверены?' isOpen={isSubmitPopupOpen} onClose={closeAllPopups}>
-        <button className="form__submit btn btn_type_save" type="submit">Да</button>
-      </PopupWithForm>
+      <PopupWithForm 
+        name='submit' 
+        title='Вы уверены?' 
+        isOpen={isSubmitPopupOpen} 
+        onClose={closeAllPopups}
+        buttonText='Да'
+      />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups}>
-        
-      </ImagePopup>
+      <ImagePopup 
+        card={selectedCard} 
+        onClose={closeAllPopups}
+      />
      
     </div>
   );

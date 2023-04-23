@@ -1,4 +1,4 @@
-export default function PopupWithForm({children, name, title, isOpen, onClose}) {
+export default function PopupWithForm({children, name, title, isOpen, onClose, buttonText}) {
   const popupClass = isOpen ? ('popup popup_overlay popup_opened'): 'popup popup_overlay';
 
   return (
@@ -8,6 +8,7 @@ export default function PopupWithForm({children, name, title, isOpen, onClose}) 
         <h2 className="popup__title">{title}</h2>
         <form className={`form form-${name}`} name={name} noValidate>
           {children}
+          <button className="form__submit btn btn_type_save" type="submit">{buttonText}</button>
         </form>
       </div>
     </section>
