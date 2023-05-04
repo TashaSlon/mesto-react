@@ -64,23 +64,23 @@ class Api {
     .then(this._getJson);
   }
 
-  likeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._getHeaders()
-    })
-    .then(this._getJson);
+  changeLikeCardStatus(cardId, isLiked) {
+    if (!isLiked) {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: 'DELETE',
+        headers: this._getHeaders()
+      })
+      .then(this._getJson);
+    } else {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this._getHeaders()
+      })
+      .then(this._getJson);
+    }
   }
 
-  dislikeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: this._getHeaders()
-    })
-    .then(this._getJson);
-  }
-
-  changeAvatar(link) {
+  setUserAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._getHeaders(),
