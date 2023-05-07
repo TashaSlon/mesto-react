@@ -14,13 +14,18 @@ export function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
         link.current.value = '';
     }
 
+    function handleClose() {
+        onClose();
+        link.current.value = '';
+    }
+
     return (
         <>
             <PopupWithForm 
           name='avatar' 
           title='Обновить аватар' 
           isOpen={isOpen} 
-          onClose={onClose}
+          onClose={handleClose}
           buttonText='Сохранить'
           onSubmit={handleSubmit}>
               <label>
