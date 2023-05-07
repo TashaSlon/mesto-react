@@ -3,14 +3,14 @@ import { useContext, useState, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
-    const [name, setName] = useState({});
-    const [description, setDescription] = useState([]);
     const currentUser = useContext(CurrentUserContext);
+    const [name, setName] = useState(currentUser.name);
+    const [description, setDescription] = useState(currentUser.about);
 
     useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-      }, [currentUser]); 
+      }, [currentUser, isOpen]);
 
     function handleNameChange(e) {
         setName(e.target.value);
@@ -27,8 +27,7 @@ export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         // Передаём значения управляемых компонентов во внешний обработчик
         onUpdateUser({
           name,
-          about: description,
-          avatar: currentUser.avatar
+          about: description
         });
     }
 
@@ -42,11 +41,11 @@ export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
             buttonText='Сохранить'
             onSubmit={handleSubmit}>
                 <label>
-                    <input className="form__input form__input_type_name" type="text" id="name-input" required minLength="2" maxLength="40" placeholder="Имя" name="name" value={name} onChange={handleNameChange}/>
+                    <input className="form__input form__input_type_name" type="text" id="name-input" required minLength="2" maxLength="40" placeholder="Имя" name="name" value={name ?? ''} onChange={handleNameChange}/>
                     <span className="form__input-error name-input-error"></span>
                 </label>
                 <label>
-                    <input className="form__input form__input_type_activity" type="text" id="activity-input" required minLength="2" maxLength="200" placeholder="О себе" name="about" value={description} onChange={handleDescriptionChange}/>
+                    <input className="form__input form__input_type_activity" type="text" id="activity-input" required minLength="2" maxLength="200" placeholder="О себе" name="about" value={description ?? ''} onChange={handleDescriptionChange}/>
                     <span className="form__input-error activity-input-error"></span>
                 </label>
             </PopupWithForm>

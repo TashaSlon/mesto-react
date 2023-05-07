@@ -69,34 +69,34 @@ function App() {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
   }
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id).then(() => {
+    api.deleteCard(card._id)
+    .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
-    });
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
   } 
 
   function handleUpdateUser(userData) {
     api.setUserInfo(userData)
     .then(() => {
-      setCurrentUser(userData);
+      setCurrentUser({...currentUser, name: userData.name, about: userData.about});
       closeAllPopups();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
   }
 
-  function handleUpdateAvatar(link) {
-    api.setUserAvatar(link)
+  function handleUpdateAvatar(avatar) {
+    api.setUserAvatar(avatar)
     .then(() => {
-      setCurrentUser({
-        name: currentUser.name,
-        about: currentUser.about,
-        avatar: link
-      });
+      setCurrentUser({...currentUser, avatar});
       closeAllPopups();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
